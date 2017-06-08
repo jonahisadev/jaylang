@@ -1,0 +1,10 @@
+== Spec ==
+
+This is a really messy spec page until I have the time to style the
+page with Markdown
+
+= Functions =
+
+func foo(x: int, y: int)[void]:
+	return x + y
+endf
