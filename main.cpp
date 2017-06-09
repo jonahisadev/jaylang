@@ -1,5 +1,6 @@
 #include <Jay/Common.h>
 #include <Jay/Util.h>
+#include <Jay/Parser.h>
 
 void help() {
 	std::cout << "== Jay Help ==" << std::endl;
@@ -16,7 +17,9 @@ int main(int argc, char** argv) {
 	
 	if (Util::strEquals(argv[1], "-c")) {
 		char* buf = Util::readFile(argv[2]);
-		std::cout << buf << std::endl;
+		Parser* p = new Parser(buf);
+		p->start();
+		delete p;
 	} else {
 		help();
 	}

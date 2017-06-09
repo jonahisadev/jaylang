@@ -1,0 +1,7 @@
+;
+;	io.vm
+;	I/O library for Jay
+;
+
+_print_num:
+	
