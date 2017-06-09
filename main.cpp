@@ -19,6 +19,7 @@ int main(int argc, char** argv) {
 		char* buf = Util::readFile(argv[2]);
 		Parser* p = new Parser(buf);
 		p->start();
+		p->printTokens();
 		delete p;
 	} else {
 		help();

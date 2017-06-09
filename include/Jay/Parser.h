@@ -2,18 +2,24 @@
 #define JAY_PARSER_H
 
 #include <Jay/Common.h>
+#include <Jay/Util.h>
+#include <Jay/Token.h>
 
 namespace Jay {
 	
 	class Parser {
 	private:
-		char* buf;
+		char* text;
+		TokenList* tokenList;
 		
 	public:
-		Parser(char* buf);
+		Parser(char* text);
 		~Parser();
 		
 		void start();
+		bool isCharImportant(char c);
+		
+		void printTokens();
 	};
 	
 }
