@@ -9,27 +9,36 @@ namespace Jay {
 	// TOKENS
 	enum {
 		TOKEN_FUNC,
+		TOKEN_ENDF,
+		TOKEN_RET,
+		
 		TOKEN_LEFT_PAR,
 		TOKEN_RIGHT_PAR,
+		TOKEN_LEFT_BRACKET,
+		TOKEN_RIGHT_BRACKET,
+		TOKEN_COLON,
 	};
 	
 	// TOKEN TYPES
 	enum {
 		TYPE_KEYWORD,
-		TYPE_SPECIAL
+		TYPE_SPECIAL,
+		TYPE_NUM,
 	};
 	
 	class Token {
 	private:
 		int type;
 		int data;
+		int line;
 		
 	public:
-		Token(int type, int data);
+		Token(int type, int data, int line);
 		~Token();
 		
 		inline int getType() const { return type; }
 		inline int getData() const { return data; }
+		inline int getLine() const { return line; }
 	};
 	
 	class TokenList {

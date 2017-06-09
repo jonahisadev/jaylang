@@ -43,4 +43,46 @@ namespace Jay {
 		return true;
 	}
 	
+	void Util::strCopy(const char* src, char* dest, int start, int end) {
+		int x = 0;
+		for (int i = start; i < end; i++) {
+			dest[x] = src[i];
+			x++;
+		}
+	}
+	
+	void Util::strCopyFull(const char* src, char* dest) {
+		int len = strLength(src);
+		strCopy(src, dest, 0, len);
+	}
+	
+	char* Util::strDup(const char* src, int start, int end) {
+		char* dest = new char[(end-start)+1];
+        ASSERT(dest, "strDup allocation failure");
+
+        strCopy(src, dest, start, end+1);
+		dest[end] = '\0';
+        return dest;
+	}
+	
+	char* Util::strDupFull(const char* src) {
+		return strDup(src, 0, strLength(src)+1);
+	}
+	
+	bool Util::isNumber(const char* str) {
+		int len = strLength(str);
+		
+		for (int i = 0; i < len; i++) {
+			if (str[i] <= '0' || str[i] >= '9')
+				return false;
+		}
+		
+		return true;
+	}
+	
+	int Util::convertNum(char* str, int base) {
+	    int x = (int) strtol(str, (char**)NULL, base);
+	    return x;
+	}
+	
 }
