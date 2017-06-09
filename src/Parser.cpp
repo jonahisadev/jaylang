@@ -18,6 +18,7 @@ namespace Jay {
 		int i = 0;
 		
 		resetLex:
+		lexi = 0;
 		for (int x = 0; x < 256; x++) {
 			lex[x] = '\0';
 		}
@@ -29,17 +30,42 @@ namespace Jay {
 			lex[lexi++] = text[i++];
 		}
 		
+		// SPECIALS
+		if (lexi == 0) {
+			switch (text[i]) {
+				case '(': {
+					tokenList->add(new Token(TYPE_SPECIAL, TOKEN_LEFT_PAR));
+					break;
+				}
+				case ')': {
+					tokenList->add(new Token(TYPE_SPECIAL, TOKEN_RIGHT_PAR));
+					break;
+				}
+				default:
+					break;
+			}
+			
+			i++;
+			goto end;
+		}
+		
 		// KEYWORDS
 		if (Util::strEquals(lex, "func")) {
 			tokenList->add(new Token(TYPE_KEYWORD, TOKEN_FUNC));
+			goto end;
 		}
 		
-		i++;
+		end:
+		if (text[i] == ' ') {
+			i++;
+		}
 		goto resetLex;
 	}
 	
 	bool Parser::isCharImportant(char c) {
-		if (c == ' ') {
+		if (c == ' ' ||
+			c == '(' ||
+			c == ')') {
 			return true;
 		}
 		return false;

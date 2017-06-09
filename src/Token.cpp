@@ -32,7 +32,7 @@ namespace Jay {
 	void TokenList::add(Token* tok) {
 		if (getSize() >= getAllocatedSize()) {
 			this->alloc_size *= 2;
-			this->data = (Token**) realloc(this->data, this->alloc_size);
+			this->data = (Token**) realloc(this->data, sizeof(Token*) * this->alloc_size);
 		}
 		
 		this->data[this->ptr++] = tok;
@@ -43,10 +43,27 @@ namespace Jay {
 	}
 	
 	void TokenList::printList() {
+		Token* tok;
 		for (int i = 0; i < getSize(); i++) {
-			if (data[i]->getType() == TYPE_KEYWORD) {
-				if (data[i]->getData() == TOKEN_FUNC) {
-					std::printf("FUNC\n");
+			tok = data[i];
+			
+			switch (tok->getType()) {
+				// KEYWORDS
+				case TYPE_KEYWORD: {
+					if (tok->getData() == TOKEN_FUNC) {
+						std::printf("FUNC\n");
+					}
+					break;
+				}
+				
+				// SPECIALS
+				case  TYPE_SPECIAL: {
+					if (tok->getData() == TOKEN_LEFT_PAR) {
+						std::printf("(\n");
+					} else if (tok->getData()) {
+						std::printf(")\n");
+					}
+					break;
 				}
 			}
 		}

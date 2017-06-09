@@ -9,11 +9,14 @@ namespace Jay {
 	// TOKENS
 	enum {
 		TOKEN_FUNC,
+		TOKEN_LEFT_PAR,
+		TOKEN_RIGHT_PAR,
 	};
 	
 	// TOKEN TYPES
 	enum {
-		TYPE_KEYWORD
+		TYPE_KEYWORD,
+		TYPE_SPECIAL
 	};
 	
 	class Token {
