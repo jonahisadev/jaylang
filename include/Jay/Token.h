@@ -1,6 +1,9 @@
 #ifndef JAY_TOKEN_H
 #define JAY_TOKEN_H
 
+#include <Jay/Common.h>
+#include <Jay/List.h>
+
 #include <cstdlib>
 #include <cstdio>
 
@@ -24,6 +27,7 @@ namespace Jay {
 		TYPE_KEYWORD,
 		TYPE_SPECIAL,
 		TYPE_NUM,
+		TYPE_NAME,
 	};
 	
 	class Token {
@@ -53,7 +57,7 @@ namespace Jay {
 		
 		void add(Token* tok);
 		Token* get(int ptr);
-		void printList();
+		void printList(List<char*>* nameList);
 		
 		inline int getPointer() const { return ptr; }
 		inline int getSize() const { return ptr; }

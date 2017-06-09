@@ -6,6 +6,7 @@ namespace Jay {
 	Parser::Parser(char* text) {
 		this->text = text;
 		this->tokenList = new TokenList(1);
+		this->nameList = new List<char*>(1);
 	}
 	
 	Parser::~Parser() {
@@ -72,12 +73,6 @@ namespace Jay {
 			goto end;
 		}
 		
-		// NUMBERS
-		if (Util::isNumber(lex)) {
-			tokenList->add(new Token(TYPE_NUM, Util::convertNum(lex, 10), line));
-			goto end;
-		}
-		
 		// KEYWORDS
 		if (Util::strEquals(lex, "func")) {
 			tokenList->add(new Token(TYPE_KEYWORD, TOKEN_FUNC, line));
@@ -87,6 +82,19 @@ namespace Jay {
 			goto end;
 		} else if (Util::strEquals(lex, "return")) {
 			tokenList->add(new Token(TYPE_KEYWORD, TOKEN_RET, line));
+			goto end;
+		}
+		
+		// NUMBERS
+		else if (Util::isNumber(lex)) {
+			tokenList->add(new Token(TYPE_NUM, Util::convertNum(lex, 10), line));
+			goto end;
+		}
+		
+		// NAME
+		else {
+			nameList->add(Util::strDupFull(lex));
+			tokenList->add(new Token(TYPE_NAME, nameList->getPointer()-1, line));
 			goto end;
 		}
 		
@@ -115,7 +123,7 @@ namespace Jay {
 	}
 	
 	void Parser::printTokens() {
-		this->tokenList->printList();
+		this->tokenList->printList(this->nameList);
 	}
 	
 }

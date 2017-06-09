@@ -43,7 +43,7 @@ namespace Jay {
 		return this->data[ptr];
 	}
 	
-	void TokenList::printList() {
+	void TokenList::printList(List<char*>* nameList) {
 		Token* tok;
 		for (int i = 0; i < getSize(); i++) {
 			tok = data[i];
@@ -79,6 +79,12 @@ namespace Jay {
 				// NUMBERS
 				case TYPE_NUM: {
 					std::printf("%d\n", tok->getData());
+					break;
+				}
+				
+				// NAMES
+				case TYPE_NAME: {
+					std::printf("NAME: %s\n", nameList->get(tok->getData()));
 					break;
 				}
 			}

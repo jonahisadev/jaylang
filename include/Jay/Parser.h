@@ -4,6 +4,7 @@
 #include <Jay/Common.h>
 #include <Jay/Util.h>
 #include <Jay/Token.h>
+#include <Jay/List.h>
 
 namespace Jay {
 	
@@ -11,6 +12,7 @@ namespace Jay {
 	private:
 		char* text;
 		TokenList* tokenList;
+		List<char*>* nameList;
 		
 	public:
 		Parser(char* text);
