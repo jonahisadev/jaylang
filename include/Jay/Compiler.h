@@ -9,12 +9,6 @@
 
 namespace Jay {
 	
-	class VMTemplate {
-	public:
-		static const char* LABEL;
-		static const char* RET_NUM;
-	};
-	
 	class Compiler {
 	private:
 		FILE* fout;
@@ -29,6 +23,13 @@ namespace Jay {
 		void start();
 		
 		void setNameList(List<char*>* nameList);
+	};
+	
+	class VMTemplate {
+	public:
+		static const char* LABEL;
+		static const char* RET_NUM;
+		static const char* RET_VOID;
 	};
 	
 }

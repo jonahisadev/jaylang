@@ -1,0 +1,7 @@
+test:
+	mov %dx $42
+	ret
+
+another:
+	ret
+

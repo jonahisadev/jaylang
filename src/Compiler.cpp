@@ -29,6 +29,12 @@ namespace Jay {
 				if (tokenList->get(i+1)->getType() == TYPE_NUM) {
 					std::fprintf(fout, VMTemplate::RET_NUM, tokenList->get(i+1)->getData());
 				}
+				
+				// Return void
+				else if (tokenList->get(i+1)->getType() == TYPE_KEYWORD &&
+						tokenList->get(i+1)->getData() == TOKEN_ENDF) {
+					std::fprintf(fout, "%s", VMTemplate::RET_VOID);		
+				}
 			}
 		}
 	}
@@ -43,5 +49,6 @@ namespace Jay {
 	
 	const char* VMTemplate::LABEL = "%s:\n";
 	const char* VMTemplate::RET_NUM = "\tmov %%dx $%d\n\tret\n\n";
+	const char* VMTemplate::RET_VOID = "\tret\n\n";
 	
 }
