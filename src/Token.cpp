@@ -87,6 +87,18 @@ namespace Jay {
 					std::printf("NAME: %s\n", nameList->get(tok->getData()));
 					break;
 				}
+				
+				// TYPES
+				case TYPE_TYPE: {
+					std::printf("TYPE: %s\n", nameList->get(tok->getData()));
+					break;
+				}
+				
+				// ID
+				case TYPE_ID: {
+					std::printf("ID: %s\n", nameList->get(tok->getData()));
+					break;
+				}
 			}
 		}
 	}

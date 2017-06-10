@@ -5,6 +5,7 @@
 #include <Jay/Util.h>
 #include <Jay/Token.h>
 #include <Jay/List.h>
+#include <Jay/Context.h>
 
 namespace Jay {
 	
@@ -22,6 +23,7 @@ namespace Jay {
 		bool isCharImportant(char c);
 		
 		void printTokens();
+		Context* createContext();
 	};
 	
 }

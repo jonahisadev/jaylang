@@ -28,6 +28,8 @@ namespace Jay {
 		TYPE_SPECIAL,
 		TYPE_NUM,
 		TYPE_NAME,
+		TYPE_TYPE,
+		TYPE_ID,
 	};
 	
 	class Token {
@@ -43,6 +45,9 @@ namespace Jay {
 		inline int getType() const { return type; }
 		inline int getData() const { return data; }
 		inline int getLine() const { return line; }
+		
+		inline void setType(int type) { this->type = type; }
+		inline void setData(int data) { this->data = data; }
 	};
 	
 	class TokenList {

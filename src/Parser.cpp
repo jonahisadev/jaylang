@@ -126,4 +126,10 @@ namespace Jay {
 		this->tokenList->printList(this->nameList);
 	}
 	
+	Context* Parser::createContext() {
+		Context* c = new Context(this->tokenList);
+		c->setNameList(this->nameList);
+		return c;
+	}
+	
 }
