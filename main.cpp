@@ -19,12 +19,19 @@ int main(int argc, char** argv) {
 	if (Util::strEquals(argv[1], "-c")) {
 		char* buf = Util::readFile(argv[2]);
 		
+		// Parse for tokens
 		Parser* p = new Parser(Util::strDupFull(buf));
 		p->start();
 		
-		Context* c = p->createContext();
-		c->start();
+		// Fill in the gaps
+		Context* context = p->createContext();
+		context->start();
 		p->printTokens();
+		delete context;
+		
+		// Compile to SpaceVM
+		Compiler* c = p->createCompiler("test.vm");
+		c->start();
 		
 		delete c;
 		delete p;

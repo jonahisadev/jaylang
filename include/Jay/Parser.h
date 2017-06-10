@@ -6,6 +6,7 @@
 #include <Jay/Token.h>
 #include <Jay/List.h>
 #include <Jay/Context.h>
+#include <Jay/Compiler.h>
 
 namespace Jay {
 	
@@ -24,6 +25,7 @@ namespace Jay {
 		
 		void printTokens();
 		Context* createContext();
+		Compiler* createCompiler(const char* path);
 	};
 	
 }

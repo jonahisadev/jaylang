@@ -15,6 +15,7 @@ namespace Jay {
 		
 		for (int i = 0; i < this->tokenList->getSize(); i++) {
 			tok = this->tokenList->get(i);
+			
 			if (tok->getType() == TYPE_NAME) {
 				// Function Name
 				if (tokenList->get(i-1)->getType() == TYPE_KEYWORD &&

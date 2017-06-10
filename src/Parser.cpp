@@ -11,6 +11,8 @@ namespace Jay {
 	
 	Parser::~Parser() {
 		delete[] text;
+		delete tokenList;
+		delete nameList;
 	}
 	
 	void Parser::start() {
@@ -128,6 +130,12 @@ namespace Jay {
 	
 	Context* Parser::createContext() {
 		Context* c = new Context(this->tokenList);
+		c->setNameList(this->nameList);
+		return c;
+	}
+	
+	Compiler* Parser::createCompiler(const char* path) {
+		Compiler* c = new Compiler(path, this->tokenList);
 		c->setNameList(this->nameList);
 		return c;
 	}
