@@ -32,6 +32,24 @@ namespace Jay {
 					tokenList->get(i+1)->getData() == TOKEN_RIGHT_BRACKET) {
 					tok->setType(TYPE_TYPE);
 				}
+				
+				// Variable Name
+				if (tokenList->get(i+1)->getType() == TYPE_SPECIAL &&
+					tokenList->get(i+1)->getData() == TOKEN_COLON) {
+					tok->setType(TYPE_ID);
+				}
+				
+				// Variable Type
+				if (tokenList->get(i-1)->getType() == TYPE_SPECIAL &&
+					tokenList->get(i-1)->getData() == TOKEN_COLON) {
+					// Function Variable Type
+					if ((tokenList->get(i+1)->getType() == TYPE_SPECIAL &&
+						tokenList->get(i+1)->getData() == TOKEN_RIGHT_PAR) ||
+						(tokenList->get(i+1)->getType() == TYPE_SPECIAL &&
+						tokenList->get(i+1)->getData() == TOKEN_COMMA)) {
+						tok->setType(TYPE_TYPE);
+					}
+				}
 			}
 		}
 	}

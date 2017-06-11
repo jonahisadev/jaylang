@@ -1,5 +1,4 @@
 #include <Jay/Parser.h>
-#include <Jay/Token.h>
 
 namespace Jay {
 	
@@ -157,16 +156,19 @@ namespace Jay {
 				// Arguments
 				
 				int argc = 0;
-				List<Variable*>* argv;
+				List<Variable*>* argv = new List<Variable*>(1);
 				if (tok->getType() == TYPE_SPECIAL &&
 					tok->getData() == TOKEN_LEFT_PAR) {
-					while (tok->getType() == TYPE_SPECIAL &&
-							tok->getData() == TOKEN_RIGHT_PAR) {
-						i++;
-						tok = tokenList->get(i);
+					i++;
+					tok = tokenList->get(i);
+					while (tok->getType() != TYPE_SPECIAL &&
+							tok->getData() != TOKEN_RIGHT_PAR) {
 						Variable* var = buildVariable(&i, VAR_TYPE_ARG);
+						std::cout << "Variable " << var->name << " of type " << var->type << std::endl;
 						argv->add(var);
 						argc++;
+						i++;
+						tok = tokenList->get(i);
 					}
 				} else {
 					serror("No left paranthesis after function name", tok->getLine());
@@ -180,8 +182,45 @@ namespace Jay {
 	}
 	
 	Variable* Parser::buildVariable(int* index, int type) {
-		std::cout << "Building variable..." << std::endl;
-		return nullptr;
+		Variable* var = new Variable();
+		Token* tok = tokenList->get(*index);
+		
+		// Name
+		if (tok->getType() == TYPE_ID) {
+			var->name = Util::strDupFull(nameList->get(tok->getData()));
+			*index = *index + 1;
+		} else {
+			delete var;
+			serror("Variable must have identifier", tok->getLine());
+		}
+		
+		// Colon
+		tok = tokenList->get(*index);
+		if (tok->getType() == TYPE_SPECIAL &&
+			tok->getData() == TOKEN_COLON) {
+			*index = *index + 1;	
+		} else {
+			delete var;
+			serror("Variable missing ':'", tok->getLine());
+		}
+		
+		// Type
+		tok = tokenList->get(*index);
+		if (tok->getType() == TYPE_TYPE) {
+			var->type = Util::strDupFull(nameList->get(tok->getData()));
+			*index = *index + 1;
+		} else {
+			delete var;
+			serror("Variable must have a type", tok->getLine());
+		}
+		
+		if (type != VAR_TYPE_ARG) {
+			// TODO: Parse for data
+		} else {
+			var->data = 0;
+		}
+		
+		return var;
 	}
 	
 	void Parser::printTokens() {

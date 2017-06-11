@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
 		// Fill in the gaps
 		Context* context = p->createContext();
 		context->start();
-		//p->printTokens();
+		p->printTokens();
 		delete context;
 		
 		// Build necessary structures
