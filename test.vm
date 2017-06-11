@@ -2,3 +2,6 @@ myFunction:
 	movw %dx $1209
 	ret
 
+test:
+	ret
+

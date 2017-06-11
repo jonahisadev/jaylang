@@ -139,11 +139,12 @@ namespace Jay {
 			
 			if (tok->getType() == TYPE_KEYWORD &&
 				tok->getData() == TOKEN_FUNC) {
-				Function* func = (Function*) malloc(sizeof(Function));
+				Function* func = new Function();
 				i++;
 				tok = tokenList->get(i);
 				
 				// Name
+				
 				if (tok->getType() == TYPE_ID) {
 					func->name = Util::strDupFull(nameList->get(tok->getData()));
 					std::cout << "Function name: " << func->name << std::endl;
@@ -156,23 +157,31 @@ namespace Jay {
 				// Arguments
 				
 				int argc = 0;
+				List<Variable*>* argv;
 				if (tok->getType() == TYPE_SPECIAL &&
 					tok->getData() == TOKEN_LEFT_PAR) {
 					while (tok->getType() == TYPE_SPECIAL &&
 							tok->getData() == TOKEN_RIGHT_PAR) {
 						i++;
 						tok = tokenList->get(i);
-						// TODO: check args
+						Variable* var = buildVariable(&i, VAR_TYPE_ARG);
+						argv->add(var);
+						argc++;
 					}
 				} else {
 					serror("No left paranthesis after function name", tok->getLine());
 				}
 				func->argc = argc;
-				func->argv = nullptr;
+				func->argv = argv->getRawData();
 				
 				funcList->add(func);
 			}
 		}
+	}
+	
+	Variable* Parser::buildVariable(int* index, int type) {
+		std::cout << "Building variable..." << std::endl;
+		return nullptr;
 	}
 	
 	void Parser::printTokens() {

@@ -20,6 +20,7 @@ namespace Jay {
 		T get(int ptr) const { return data[ptr]; }
 		void set(int ptr, T data);
 		
+		inline T* getRawData() const { return data; }
 		inline int getPointer() const { return ptr; }
 		inline int getSize() const { return ptr; }
 		inline int getAllocatedSize() const { return alloc_size; }
@@ -28,6 +29,7 @@ namespace Jay {
 	template class List<char*>;
 	template class List<int>;
 	template class List<Function*>;
+	template class List<Variable*>;
 	
 	template <class T>
 	List<T>::List(int size) {

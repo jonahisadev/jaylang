@@ -3,6 +3,7 @@
 
 #include <Jay/Common.h>
 #include <Jay/Util.h>
+#include <Jay/Variable.h>
 
 namespace Jay {
 	
@@ -10,10 +11,7 @@ namespace Jay {
 		char* name;
 		char* ret;
 		int argc;
-		int* argv;
-		
-		//Function(char* name, char* ret, int argc, int* argv);
-		//~Function();
+		Variable** argv;
 	};
 	
 }

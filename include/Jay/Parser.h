@@ -8,8 +8,13 @@
 #include <Jay/Context.h>
 #include <Jay/Compiler.h>
 #include <Jay/Function.h>
+#include <Jay/Variable.h>
 
 namespace Jay {
+	
+	enum  {
+		VAR_TYPE_ARG,
+	};
 	
 	class Parser {
 	private:
@@ -27,6 +32,7 @@ namespace Jay {
 		bool isCharImportant(char c);
 		
 		void buildFunctions();
+		Variable* buildVariable(int* index, int type);
 		
 		void printTokens();
 		Context* createContext();
