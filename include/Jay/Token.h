@@ -20,6 +20,7 @@ namespace Jay {
 		TOKEN_LEFT_BRACKET,
 		TOKEN_RIGHT_BRACKET,
 		TOKEN_COLON,
+		TOKEN_COMMA,
 	};
 	
 	// TOKEN TYPES
@@ -68,6 +69,8 @@ namespace Jay {
 		inline int getSize() const { return ptr; }
 		inline int getAllocatedSize() const { return alloc_size; }
 	};
+	
+	void serror(const char* msg, int line);
 	
 }
 

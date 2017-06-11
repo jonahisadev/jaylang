@@ -28,7 +28,7 @@ namespace Jay {
 	class VMTemplate {
 	public:
 		static const char* LABEL;
-		static const char* RET_NUM;
+		static const char* RET_INT;
 		static const char* RET_VOID;
 	};
 	

@@ -7,14 +7,17 @@
 #include <Jay/List.h>
 #include <Jay/Context.h>
 #include <Jay/Compiler.h>
+#include <Jay/Function.h>
 
 namespace Jay {
 	
 	class Parser {
 	private:
 		char* text;
+		
 		TokenList* tokenList;
 		List<char*>* nameList;
+		List<Function*>* funcList;
 		
 	public:
 		Parser(char* text);
@@ -22,6 +25,8 @@ namespace Jay {
 		
 		void start();
 		bool isCharImportant(char c);
+		
+		void buildFunctions();
 		
 		void printTokens();
 		Context* createContext();

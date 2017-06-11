@@ -73,7 +73,7 @@ namespace Jay {
 		int len = strLength(str);
 		
 		for (int i = 0; i < len; i++) {
-			if (str[i] <= '0' || str[i] >= '9')
+			if (str[i] < '0' || str[i] > '9')
 				return false;
 		}
 		

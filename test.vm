@@ -1,7 +1,4 @@
-test:
-	mov %dx $42
-	ret
-
-another:
+myFunction:
+	movw %dx $1209
 	ret
 

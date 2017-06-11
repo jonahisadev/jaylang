@@ -1,3 +1,3 @@
-func test()[int]:
-	return 42
+func myFunction()[int]:
+	return 1209
 endf

@@ -73,6 +73,8 @@ namespace Jay {
 						std::printf("]\n");
 					else if (tok->getData() == TOKEN_COLON)
 						std::printf(":\n");
+					else if (tok->getData() == TOKEN_COMMA)
+						std::printf(",\n");
 					break;
 				}
 				
@@ -101,6 +103,11 @@ namespace Jay {
 				}
 			}
 		}
+	}
+	
+	void serror(const char* msg, int line) {
+		std::fprintf(stderr, "[ERROR] %03d: %s\n", line, msg);
+		std::exit(1);
 	}
 	
 }

@@ -7,6 +7,7 @@ namespace Jay {
 		this->text = text;
 		this->tokenList = new TokenList(1);
 		this->nameList = new List<char*>(1);
+		this->funcList = new List<Function*>(1);
 	}
 	
 	Parser::~Parser() {
@@ -67,6 +68,10 @@ namespace Jay {
 					tokenList->add(new Token(TYPE_SPECIAL, TOKEN_COLON, line));
 					break;
 				}
+				case ',': {
+					tokenList->add(new Token(TYPE_SPECIAL, TOKEN_COMMA, line));
+					break;
+				}
 				default:
 					break;
 			}
@@ -118,10 +123,56 @@ namespace Jay {
 			c == ')' ||
 			c == '[' ||
 			c == ']' ||
-			c == ':') {
+			c == ':' ||
+			c == ',') {
 			return true;
 		}
 		return false;
+	}
+	
+	void Parser::buildFunctions() {
+		Token* tok;
+		int offset = 0;
+		
+		for (int i = 0; i < tokenList->getSize(); i++) {
+			tok = tokenList->get(i);
+			
+			if (tok->getType() == TYPE_KEYWORD &&
+				tok->getData() == TOKEN_FUNC) {
+				Function* func = (Function*) malloc(sizeof(Function));
+				i++;
+				tok = tokenList->get(i);
+				
+				// Name
+				if (tok->getType() == TYPE_ID) {
+					func->name = Util::strDupFull(nameList->get(tok->getData()));
+					std::cout << "Function name: " << func->name << std::endl;
+				} else {
+					serror("No function name found", tok->getLine());
+				}
+				i++;
+				tok = tokenList->get(i);
+				
+				// Arguments
+				
+				int argc = 0;
+				if (tok->getType() == TYPE_SPECIAL &&
+					tok->getData() == TOKEN_LEFT_PAR) {
+					while (tok->getType() == TYPE_SPECIAL &&
+							tok->getData() == TOKEN_RIGHT_PAR) {
+						i++;
+						tok = tokenList->get(i);
+						// TODO: check args
+					}
+				} else {
+					serror("No left paranthesis after function name", tok->getLine());
+				}
+				func->argc = argc;
+				func->argv = nullptr;
+				
+				funcList->add(func);
+			}
+		}
 	}
 	
 	void Parser::printTokens() {

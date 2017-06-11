@@ -1,6 +1,8 @@
 #ifndef JAY_LIST_H
 #define JAY_LIST_H
 
+#include <Jay/Function.h>
+
 namespace Jay {
 	
 	template <class T>
@@ -25,6 +27,7 @@ namespace Jay {
 	
 	template class List<char*>;
 	template class List<int>;
+	template class List<Function*>;
 	
 	template <class T>
 	List<T>::List(int size) {

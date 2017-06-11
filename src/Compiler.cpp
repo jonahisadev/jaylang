@@ -27,7 +27,7 @@ namespace Jay {
 				tok->getData() == TOKEN_RET) {
 				// Return literal
 				if (tokenList->get(i+1)->getType() == TYPE_NUM) {
-					std::fprintf(fout, VMTemplate::RET_NUM, tokenList->get(i+1)->getData());
+					std::fprintf(fout, VMTemplate::RET_INT, tokenList->get(i+1)->getData());
 				}
 				
 				// Return void
@@ -48,7 +48,7 @@ namespace Jay {
 	//
 	
 	const char* VMTemplate::LABEL = "%s:\n";
-	const char* VMTemplate::RET_NUM = "\tmov %%dx $%d\n\tret\n\n";
+	const char* VMTemplate::RET_INT = "\tmovw %%dx $%d\n\tret\n\n";
 	const char* VMTemplate::RET_VOID = "\tret\n\n";
 	
 }
