@@ -1,7 +1,4 @@
-myFunction:
-	movw %dx $1209
-	ret
-
 test:
+	arg %dx $2
 	ret
 

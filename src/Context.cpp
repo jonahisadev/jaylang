@@ -39,6 +39,12 @@ namespace Jay {
 					tok->setType(TYPE_ID);
 				}
 				
+				// Return Variable
+				if (tokenList->get(i-1)->getType() == TYPE_KEYWORD &&
+					tokenList->get(i-1)->getData() == TOKEN_RET) {
+					tok->setType(TYPE_ID);	
+				}
+				
 				// Variable Type
 				if (tokenList->get(i-1)->getType() == TYPE_SPECIAL &&
 					tokenList->get(i-1)->getData() == TOKEN_COLON) {

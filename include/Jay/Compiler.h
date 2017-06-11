@@ -15,6 +15,9 @@ namespace Jay {
 		
 		TokenList* tokenList;
 		List<char*>* nameList;
+		List<Function*>* funcList;
+		
+		char* functionScope;
 		
 	public:
 		Compiler(const char* path, TokenList* tokenList);
@@ -23,6 +26,7 @@ namespace Jay {
 		void start();
 		
 		void setNameList(List<char*>* nameList);
+		void setFunctionList(List<Function*>* funcList);
 	};
 	
 	class VMTemplate {
@@ -30,6 +34,7 @@ namespace Jay {
 		static const char* LABEL;
 		static const char* RET_INT;
 		static const char* RET_VOID;
+		static const char* RET_ARG;
 	};
 	
 }

@@ -146,7 +146,7 @@ namespace Jay {
 				
 				if (tok->getType() == TYPE_ID) {
 					func->name = Util::strDupFull(nameList->get(tok->getData()));
-					std::cout << "Function name: " << func->name << std::endl;
+					//std::cout << "Function name: " << func->name << std::endl;
 				} else {
 					serror("No function name found", tok->getLine());
 				}
@@ -164,7 +164,7 @@ namespace Jay {
 					while (tok->getType() != TYPE_SPECIAL &&
 							tok->getData() != TOKEN_RIGHT_PAR) {
 						Variable* var = buildVariable(&i, VAR_TYPE_ARG);
-						std::cout << "Variable " << var->name << " of type " << var->type << std::endl;
+						//std::cout << "Variable " << var->name << " of type " << var->type << std::endl;
 						argv->add(var);
 						argc++;
 						i++;
@@ -236,6 +236,7 @@ namespace Jay {
 	Compiler* Parser::createCompiler(const char* path) {
 		Compiler* c = new Compiler(path, this->tokenList);
 		c->setNameList(this->nameList);
+		c->setFunctionList(this->funcList);
 		return c;
 	}
 	

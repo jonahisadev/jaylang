@@ -1,7 +1,3 @@
-func myFunction()[int]:
-	return 1209
-endf
-
-func test(x: int)[void]:
-	return
+func test(x: int, y: int)[int]:
+	return y
 endf
